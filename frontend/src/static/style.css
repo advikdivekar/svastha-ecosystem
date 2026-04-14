@@ -1,0 +1,501 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+:root {
+    /* Refined color palette matching the CloudX screenshot carefully */
+    --primary: #FF7F11; /* True CloudX Orange */
+    --primary-dark: #d9690b;
+    --bg-color: #FAF9F6; /* Extremely soft off-white grid background */
+    --card: #FFFFFF;
+    
+    --text: #000000;
+    --text-muted: #555555;
+    
+    /* Strict but NOT overwhelmingly thick lines */
+    --border: #000000;
+    --border-width: 2px;
+    --radius: 0px;
+    
+    --success: #1cdb94;
+    --warning: #ffbd3a;
+    --danger: #ff5b5b;
+    
+    /* Sharp but refined shadows */
+    --shadow: 4px 4px 0px rgba(0,0,0,1);
+    --shadow-sm: 2px 2px 0px rgba(0,0,0,1);
+    --shadow-active: 0px 0px 0px rgba(0,0,0,1);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: 
+        linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+    background-size: 30px 30px; /* Larger grid like architectural diagrams */
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+    padding-bottom: 50px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+    background: var(--bg-color);
+    border-bottom: var(--border-width) solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-brand {
+    font-weight: 900;
+    font-size: 18px;
+    color: #000;
+    background-color: var(--primary);
+    text-decoration: none;
+    margin-right: 24px;
+    padding: 6px 14px;
+    border: var(--border-width) solid var(--border);
+    box-shadow: var(--shadow-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.nav-brand:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+nav a:not(.nav-brand) {
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border: 2px solid transparent; 
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.15s;
+    text-transform: uppercase;
+}
+
+nav a:not(.nav-brand):hover,
+nav a.active {
+    background: #fff;
+    color: var(--text);
+    border: 2px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ── LAYOUT ── */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px var(--primary); /* subtle orange accent */
+}
+
+.page-subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 40px;
+    font-weight: 600;
+    border-left: 4px solid var(--primary);
+    padding-left: 12px;
+}
+
+/* ── CARDS (Like CloudX Nodes) ── */
+.card, .stat-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: var(--border-width) solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 32px;
+}
+
+.card-header {
+    padding: 16px 24px;
+    border-bottom: var(--border-width) solid var(--border);
+    background: #f4f4f4; /* Clean light gray */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-body {
+    padding: 24px;
+}
+
+/* ── STAT CARDS ── */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+}
+
+.stat-value {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+}
+
+.stat-value.blue { color: var(--primary); }
+.stat-value.green { color: var(--success); }
+.stat-value.orange { color: var(--warning); }
+.stat-value.red { color: var(--danger); }
+
+/* ── TABLES ── */
+.table-wrap {
+    overflow-x: auto;
+    border: var(--border-width) solid var(--border);
+    background: var(--card);
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+thead th {
+    background: #f4f4f4;
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 800;
+    color: var(--text);
+    text-transform: uppercase;
+    border-bottom: var(--border-width) solid var(--border);
+    border-right: 1px solid #ccc;
+}
+
+thead th:last-child { border-right: none; }
+
+tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #ddd; 
+    border-right: 1px solid #ddd;
+    color: var(--text);
+    font-weight: 600;
+}
+
+tbody td:last-child { border-right: none; }
+tbody tr:last-child td { border-bottom: none; }
+
+tbody tr:hover {
+    background: #fdfdfd;
+}
+
+/* ── BADGES ── */
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 2px solid var(--border);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-sm);
+    background: #fff;
+    color: var(--text);
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+
+.badge-blue { background: #4df0ff; }
+.badge-green { background: var(--success); }
+.badge-red { background: var(--danger); }
+.badge-orange { background: var(--warning); }
+.badge-gray { background: #e5e7eb; }
+
+/* ── SEARCH ── */
+.search-bar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 12px 16px;
+    border: var(--border-width) solid var(--border);
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 600;
+    outline: none;
+    background: var(--card);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.search-bar input:focus {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 var(--border);
+    background: #fffdf5;
+}
+
+/* ── BUTTONS ── */
+.btn {
+    padding: 12px 20px;
+    border: var(--border-width) solid var(--border);
+    font-size: 13px;
+    font-weight: 800;
+    font-family: inherit;
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    text-transform: uppercase;
+    background: #fff;
+    color: var(--text);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-outline:hover { background: #f4f4f4; }
+
+/* ── RISK METER ── */
+.risk-bar {
+    height: 12px;
+    border: var(--border-width) solid var(--border);
+    background: #fff;
+    overflow: hidden;
+    margin-top: 12px;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.risk-fill {
+    height: 100%;
+    border-right: var(--border-width) solid var(--border);
+    transition: width 0.4s ease;
+}
+
+/* ── GRID ── */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px; /* Increased gap */
+    margin-bottom: 32px;
+}
+
+/* ── LOADING / EMPTY ── */
+.loading, .empty {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.empty {
+    border: 2px dashed #aaa;
+    background: rgba(0,0,0,0.02);
+}
+
+/* ── MODAL (CLEAN NEO-BRUTALIST) ── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.7); /* Lighter backdrop to reduce overwhelm */
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal {
+    background: var(--card);
+    width: 100%;
+    max-width: 750px; /* Slightly wider */
+    max-height: 85vh; /* STRICT HEIGHT LIMIT */
+    border: 3px solid var(--border); /* Slightly thicker border for modal only */
+    box-shadow: 8px 8px 0px var(--border); /* Pronounced shadow */
+    display: flex; /* Flex layout to hold header and body */
+    flex-direction: column; /* Stack vertically */
+    /* REMOVED OVERFLOW FROM HERE, MOVED TO BODY */
+}
+
+.modal-header {
+    background: #fff; /* Restored to clean white */
+    padding: 20px 24px;
+    border-bottom: 3px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0; /* Prevents header from shrinking */
+}
+
+.modal-header .card-title {
+    margin: 0;
+    font-size: 20px;
+    color: var(--text);
+    /* Adding subtle orange block right next to it instead of massive orange header */
+    border-left: 6px solid var(--primary);
+    padding-left: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.modal-body {
+    padding: 32px;
+    overflow-y: auto; /* SCROLLING HAPPENS HERE */
+    flex: 1; /* Takes up remaining height perfectly */
+    min-height: 0; /* Ensures flex container scrolls its overflow */
+}
+
+.modal-close {
+    background: #f4f4f4;
+    border: 2px solid var(--border);
+    box-shadow: 2px 2px 0px var(--border);
+    font-size: 16px;
+    font-weight: 900;
+    cursor: pointer;
+    color: var(--text);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.modal-close:hover {
+    background: var(--text);
+    color: #fff;
+}
+
+.modal-close:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px var(--border);
+}
+
+/* Modifying sub-elements in Modal to separate them out better */
+.modal-body h4 {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    font-size: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+    color: var(--text);
+}
+.modal-body h4:first-child {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── FORMS ── */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    color: var(--text);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: var(--border-width) solid var(--border);
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 600;
+    outline: none;
+    background: #fff;
+    box-shadow: 3px 3px 0px var(--border);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px var(--border);
+    background: #fffdf5;
+}
+
+.btn-success { background: var(--success); color: #000; }
+.btn-success:hover { background: #18b379; }
+
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-danger:hover { background: #e04a4a; }
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: var(--border-width) solid var(--border);
+}
