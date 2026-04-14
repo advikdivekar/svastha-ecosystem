@@ -1,1 +1,77 @@
-/backend/.env
+# ─── Python ───────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# ─── Virtual Environment ──────────────────────────────────────
+venv/
+.venv/
+env/
+.env.local
+.env.production
+
+# ─── Environment Variables ────────────────────────────────────
+.env
+!.env.example
+
+# ─── ML Model ─────────────────────────────────────────────────
+backend/ml/model.pkl
+backend/ml/*.pkl
+backend/ml/*.joblib
+
+# ─── Database ─────────────────────────────────────────────────
+*.sql.bak
+*.db
+*.sqlite
+*.sqlite3
+
+# ─── Processed Data ───────────────────────────────────────────
+data/processed/
+
+# ─── Node / Frontend ──────────────────────────────────────────
+node_modules/
+dist/
+.DS_Store
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# ─── Vite ─────────────────────────────────────────────────────
+*.local
+
+# ─── IDE ──────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.antigravity
+
+# ─── macOS ────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# ─── Logs ─────────────────────────────────────────────────────
+*.log
+logs/
+uvicorn.log
+
+# ─── Testing ──────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
